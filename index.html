@@ -311,7 +311,36 @@ document.write('<S' + 'CRIPT TYPE="text/javascript" SRC="//cpm.ezmob.com/tag?zon
 <div class="comment"><div class="name">Priya</div><div class="muted">3 days ago</div><p>Excited for launch. Looks clean and professional.</p></div>
 </div>
 </section>
+<!-- Ad Container -->
+<div id="ad-container" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  z-index: 9999;
+">
 
+  <!-- BEGIN EZMOB TAG -->
+  <script type="text/javascript">
+  var __jscp=function(){
+    for(var b=0,a=window;a!=a.parent;)++b,a=a.parent;
+    if(a=window.parent==window?document.URL:document.referrer){
+      var c=a.indexOf("://");
+      if(c>=0) a=a.substring(c+3);
+      c=a.indexOf("/");
+      if(c>=0) a=a.substring(0,c);
+    }
+    var b={pu:a,"if":b,rn:Math.floor(99999999*Math.random())+1},a=[],d;
+    for(d in b) a.push(d+"="+encodeURIComponent(b[d]));
+    return encodeURIComponent(a.join("&"));
+  };
+  document.write('<script src="//cpm.ezmob.com/tag?zone_id=YOUR_ZONE_ID&size=320x50&subid=&j=' + __jscp() + '"><\/script>');
+  </script>
+  <!-- END EZMOB TAG -->
+
+</div>
 <div class="footer">
 <p>© <span id="yr"></span> Profta — Gaming & Earning Hub · Demo site. Replace ad placeholders with real ad code.</p>
 </div>

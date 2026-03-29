@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Banner Ad Test</title>
+  <title>Earn Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -9,52 +9,146 @@
       margin: 0;
       font-family: Arial;
       text-align: center;
+      background: #f5f5f5;
     }
 
-    .content {
+    .box {
+      background: #fff;
+      margin: 15px;
       padding: 20px;
+      border-radius: 10px;
     }
 
-    #ad-box {
+    .btn {
+      padding: 12px 25px;
+      font-size: 18px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .ad {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    #bottom-ad {
       position: fixed;
       bottom: 0;
       width: 100%;
       background: #fff;
-      text-align: center;
       border-top: 1px solid #ccc;
-      z-index: 9999;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="content">
-    <h2>Welcome to Ad Page</h2>
-    <p>Below banner ad should load 👇</p>
+  <div class="box">
+    <h2>💰 Earn Rewards Daily</h2>
+    <p>Complete tasks and earn money easily.</p>
   </div>
 
-  <!-- 🔥 Banner Ad -->
-  <div id="ad-box">
-
-    <!-- BEGIN EZMOB TAG -->
-    <script type="text/javascript">
-    var __jscp=function(){
-      for(var b=0,a=window;a!=a.parent;)++b,a=a.parent;
-      if(a=window.parent==window?document.URL:document.referrer){
-        var c=a.indexOf("://");
-        if(c>=0) a=a.substring(c+3);
-        c=a.indexOf("/");
-        if(c>=0) a=a.substring(0,c);
-      }
-      var b={pu:a,"if":b,rn:Math.floor(99999999*Math.random())+1},a=[],d;
-      for(d in b) a.push(d+"="+encodeURIComponent(b[d]));
-      return encodeURIComponent(a.join("&"));
-    };
-    document.write('<script src="//cpm.ezmob.com/tag?zone_id=347572&size=320x50&subid=&j=' + __jscp() + '"><\/script>');
+  <!-- 🔥 Banner Ad (Top) -->
+  <div class="ad">
+    <script>
+      var s1 = document.createElement("script");
+      s1.src = "//cpm.ezmob.com/tag?zone_id=347572&size=320x50";
+      document.body.appendChild(s1);
     </script>
-    <!-- END EZMOB TAG -->
+  </div>
 
+  <div class="box">
+    <p>Click below to watch ad and earn reward 👇</p>
+
+    <button class="btn" onclick="showVideoAd()">🎥 Watch Ad & Earn</button>
+
+    <!-- 🔥 Video Ad Container -->
+    <div id="video-ad" style="margin-top:20px;"></div>
+  </div>
+
+  <!-- 🔥 Banner Ad (Middle) -->
+  <div class="ad">
+    <script>
+      var s2 = document.createElement("script");
+      s2.src = "//cpm.ezmob.com/tag?zone_id=347572&size=320x50";
+      document.body.appendChild(s2);
+    </script>
+  </div>
+
+  <!-- 🔥 Video Ad Script -->
+  <script src="https://docdn.ezmob.com/prebid.js" async></script>
+
+  <script>
+    function showVideoAd() {
+
+      var container = document.getElementById("video-ad");
+      container.innerHTML = '<div id="container-1"></div>';
+
+      var pbjs = pbjs || {};
+      pbjs.que = pbjs.que || [];
+
+      pbjs.que.push(function() {
+        var adUnits = [{
+          code: 'container-1',
+          mediaTypes: {
+            video: {
+              context: 'outstream',
+              playerSize: [300, 250],
+              renderer: {
+                url: 'https://docdn.ezmob.com/outstream_pb.js',
+                render: renderOutstream
+              }
+            }
+          },
+          bids: [{
+            bidder: 'adkernel',
+            params: {
+              zoneId: 347587,
+              host: 'cpm.ezmob.com'
+            }
+          }]
+        }];
+
+        pbjs.addAdUnits(adUnits);
+
+        pbjs.requestBids({
+          bidsBackHandler: function() {
+            processAd('container-1');
+          }
+        });
+      });
+    }
+
+    function processAd(adUnit) {
+      var bids = pbjs.getHighestCpmBids(adUnit);
+
+      if (bids.length === 0) {
+        alert("Ad not available 😢 Try again");
+        return;
+      }
+
+      pbjs.renderAd(document, bids[0].adId);
+    }
+
+    function renderOutstream(bid) {
+      OutstreamPlayerPB(bid, {
+        displayMode: 'floating',
+        transitions: true,
+        vpaidMode: 2
+      });
+    }
+  </script>
+
+  <!-- 🔥 Bottom Banner -->
+  <div id="bottom-ad">
+    <script>
+      var s3 = document.createElement("script");
+      s3.src = "//cpm.ezmob.com/tag?zone_id=347572&size=320x50";
+      document.body.appendChild(s3);
+    </script>
   </div>
 
 </body>
